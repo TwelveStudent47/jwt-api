@@ -1,14 +1,16 @@
 const express = require("express");
+const notFoundMiddleware = require("./middleware/not-found");
+const errorMiddleware = require("./middleware/error-handler");
+const routes = require("./routes/main");
 require("express-async-errors");
 require("dotenv").config();
 
 const app = express();
 
-const notFoundMiddleware = require("./middleware/not-found");
-const errorMiddleware = require("./middleware/error-handler");
-
 app.use(express.static("./public"));
 app.use(express.json());
+
+app.use("/api", routes);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
