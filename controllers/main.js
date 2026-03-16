@@ -1,5 +1,11 @@
+const CustomAPIError = require("../errors/custom-error");
+
 const login = async (req, res) => {
-    res.send("Fake Login/Register/Signup Route");
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        throw new CustomAPIError("Please provide username and password", 400);
+    }
 } 
 
 const dashboard = async (req, res) => {
@@ -10,4 +16,4 @@ const dashboard = async (req, res) => {
 module.exports = {
     login,
     dashboard
-}
+};
